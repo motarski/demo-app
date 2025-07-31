@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: neo4j-db-v1
+  namespace: demo-app
+  labels:
+    app: neo4j-db
+spec:
+  ports:
+  - port: 7474
+    protocol: TCP
+    targetPort: 7474
+  selector:
+    app: neo4j-db
+    version: v1
+  type: ClusterIP

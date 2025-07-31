@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-v3
+  namespace: demo-app
+  labels:
+    app: backend
+    version: v3
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend
+      version: v3
+  template:
+    metadata:
+      labels:
+        app: backend
+        version: v3
+    spec:
+      containers:
+      - name: backend
+        image: node:23-alpine
+        ports:
+          - name: http
+            containerPort: 8080
+            protocol: TCP
+        livenessProbe:
+          tcpSocket:
+            port: http
+        readinessProbe:
+          tcpSocket:
+            port: http
+        volumeMounts:
+        - name: backend-v3-code
+          mountPath: /app/index.js
+          subPath: index.js
+        command: ["/bin/sh"]
+        args:
+        - -c
+        - |
+          apk add --no-cache nodejs npm mysql-client
+          cd /app
+          npm init -y
+          npm install express mysql2
+          node index.js
+        envFrom:
+        - secretRef:
+            name: mysql-secrets
+      volumes:
+      - name: backend-v3-code
+        configMap:
+          name: backend-v3-code
