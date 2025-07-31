@@ -9,7 +9,7 @@ spec:
   ports:
   - port: 8080
     protocol: TCP
-    targetPort: 8081
+    targetPort: 8080
   selector:
     app: backend
     version: v1
@@ -283,8 +283,6 @@ metadata:
   labels:
     app: frontend
     version: v1
-    env: poc
-    env: poc
 spec:
   replicas: 1
   selector:
@@ -296,8 +294,6 @@ spec:
       labels:
         app: frontend
         version: v1
-        env: poc
-        env: poc
     spec:
       containers:
       - name: frontend
