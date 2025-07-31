@@ -6,7 +6,7 @@ metadata:
   labels:
     app: frontend
     version: v1
-spec:
+    env: pocspec:
   replicas: 1
   selector:
     matchLabels:
@@ -17,7 +17,7 @@ spec:
       labels:
         app: frontend
         version: v1
-    spec:
+        env: poc    spec:
       containers:
       - name: frontend
         image: motarski/fake-service:v0.26.2
