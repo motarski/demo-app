@@ -1,1 +1,18 @@
-placeholder
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-v1
+  namespace: demo
+  labels:
+    app: backend
+    version: v1
+spec:
+  selector:
+    app: backend
+    version: v1
+  ports:
+  - port: 80
+    targetPort: 8080
+    protocol: TCP
+    name: http
+  type: ClusterIP
