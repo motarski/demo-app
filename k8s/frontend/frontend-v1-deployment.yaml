@@ -6,7 +6,6 @@ metadata:
   labels:
     app: frontend
     version: v1
-    env: poc
 spec:
   replicas: 1
   selector:
@@ -18,7 +17,6 @@ spec:
       labels:
         app: frontend
         version: v1
-        env: poc
     spec:
       containers:
       - name: frontend
